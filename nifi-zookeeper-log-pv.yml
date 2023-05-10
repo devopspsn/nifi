@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nifi-zookeeper-log-pv
+  namespace: nifi
+  labels:
+    type: local
+spec:
+  storageClassName: nifi-zookeeper-log-sc
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/k8s/test_zookeeper"
