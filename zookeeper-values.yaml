@@ -561,7 +561,7 @@ persistence:
   enabled: true
   ## @param persistence.existingClaim Name of an existing PVC to use (only when deploying a single replica)
   ##
-  existingClaim: nifi-zookeeper-data-pvc
+  existingClaim: ""
   ## @param persistence.storageClass PVC Storage Class for ZooKeeper data volume
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -569,14 +569,14 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: nifi-zookeeper-data-sc
+  storageClass: ""
   ## @param persistence.accessModes PVC Access modes
   ##
   accessModes:
     - ReadWriteOnce
   ## @param persistence.size PVC Storage Request for ZooKeeper data volume
   ##
-  size: 1Gi
+  size: 8Gi
   ## @param persistence.annotations Annotations for the PVC
   ##
   annotations: {}
@@ -593,12 +593,12 @@ persistence:
   dataLogDir:
     ## @param persistence.dataLogDir.size PVC Storage Request for ZooKeeper's dedicated data log directory
     ##
-    size: 1Gi
+    size: 8Gi
     ## @param persistence.dataLogDir.existingClaim Provide an existing `PersistentVolumeClaim` for ZooKeeper's data log directory
     ## If defined, PVC must be created manually before volume will be bound
     ## The value is evaluated as a template
     ##
-    existingClaim: nifi-zookeeper-log-pvc
+    existingClaim: ""
     ## @param persistence.dataLogDir.selector Selector to match an existing Persistent Volume for ZooKeeper's data log PVC
     ## If set, the PVC can't have a PV dynamically provisioned for it
     ## E.g.
