@@ -92,7 +92,7 @@ properties:
   externalSecure: false
   isNode: false
   httpsPort: 8443
-  webProxyHost: 192.168.13.11:30236 # <clusterIP>:<NodePort> (If Nifi service is NodePort or LoadBalancer)
+  webProxyHost: # <clusterIP>:<NodePort> (If Nifi service is NodePort or LoadBalancer)
   clusterPort: 6007
   provenanceStorage: "8 GB"
   provenanceMaxStorageTime: "10 days"
@@ -122,8 +122,8 @@ auth:
 
   # Automaticaly disabled if OIDC or LDAP enabled
   singleUser:
-    username: admin
-    password: apache_nifi_pass # Must to have at least 12 characters
+    username: username
+    password: changemechangeme # Must to have at least 12 characters
 
   clientAuth:
     enabled: false
@@ -181,9 +181,9 @@ headless:
 
 # ui service
 service:
-  type: NodePort
+  type: ClusterIP
   httpsPort: 8443
-  nodePort: 30236
+  # nodePort: 30236
   annotations: {}
     # loadBalancerIP:
     ## Load Balancer sources
@@ -239,9 +239,8 @@ sidecar:
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
 persistence:
-  enabled: true
+  enabled: false
 
-  storageClass: nifi-storage
   # When creating persistent storage, the NiFi helm chart can either reference an already-defined
   # storage class by name, such as "standard" or can define a custom storage class by specifying
   # customStorageClass: true and providing the "storageClass", "storageProvisioner" and "storageType".
@@ -264,16 +263,16 @@ persistence:
     size: 1Gi
   # Storage capacity for the FlowFile repository
   flowfileRepoStorage:
-    size: 1Gi
+    size: 10Gi
   # Storage capacity for the Content repository
   contentRepoStorage:
-    size: 1Gi
+    size: 10Gi
   # Storage capacity for the Provenance repository. When changing this, one should also change the properties.provenanceStorage value above, also.
   provenanceRepoStorage:
-    size: 1Gi
+    size: 10Gi
   # Storage capacity for nifi logs
   logStorage:
-    size: 1Gi
+    size: 5Gi
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
